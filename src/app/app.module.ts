@@ -11,9 +11,9 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { BadgeListComponent } from './components/badge-list/badge-list.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent, TitleComponent, DetailComponent, BadgeComponent, BadgeListComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [BrowserModule, AppRoutingModule, HttpClientModule, HomeComponent, NotFoundComponent, TitleComponent, DetailComponent, BadgeComponent, BadgeListComponent],
+    providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

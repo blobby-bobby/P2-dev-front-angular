@@ -3,11 +3,15 @@ import { Observable, of, Subscription } from 'rxjs';
 import { BadgeType } from 'src/app/core/models/Badge';
 import { OlympicType } from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import { BadgeListComponent } from '../../components/badge-list/badge-list.component';
+import { TitleComponent } from '../../components/title/title.component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: true,
+    imports: [TitleComponent, BadgeListComponent],
 })
 export class HomeComponent implements OnInit {
   

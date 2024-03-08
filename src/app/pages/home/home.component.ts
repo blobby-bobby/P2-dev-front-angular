@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
-    this.olympicService.getOlympics().subscribe((olympics) => {
+    this.olympicService.getOlympics().subscribe((olympics: OlympicType[]) => {
       const uniqueParticipations: number[] = [];
 
       // Iterate through the olympics array and extract unique JOs in the data

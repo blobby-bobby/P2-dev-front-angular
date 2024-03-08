@@ -15,7 +15,7 @@ export class DetailComponent implements OnInit {
   datas: BadgeType[] = [
     { datakey: 'Number of entries', datavalue: 3 },
     { datakey: 'Total number medals', datavalue: 5 },
-    { datakey: 'Total number of countries', datavalue: 32 },
+    { datakey: 'Total number of athletes', datavalue: 32 },
   ];
 
   constructor() { }

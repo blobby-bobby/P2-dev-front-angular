@@ -24,6 +24,10 @@
     ],
     "useDefineForClassFields": false,
   },
+  "include": [
+    "src/**/*.ts",
+    "node_modules"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

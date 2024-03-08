@@ -1,9 +1,7 @@
-// TODO: create here a typescript interface for an olympic country
-/*
-example of an olympic country:
-{
-    id: 1,
-    country: "Italy",
-    participations: []
+import { PartcipationType } from "./Participation"
+
+export type OlympicType = {
+    id: number,
+    country: string,
+    participations: PartcipationType[]
 }
-*/

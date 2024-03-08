@@ -1,0 +1,18 @@
+.badge {
+    border: .2rem solid var(--main-accent-color);
+    border-radius: .8rem;
+    padding: .5rem 1rem;
+    text-align: center;
+    width: fit-content;
+
+    h2 {
+        font-weight: 400;
+        color: var(--secondary-text-color);
+    }
+
+    p {
+        font-weight: 700;
+        margin-top: .5rem;
+        font-size: 1.2rem;
+    }
+}

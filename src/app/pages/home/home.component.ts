@@ -5,6 +5,7 @@ import { OlympicType } from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { BadgeListComponent } from '../../components/badge-list/badge-list.component';
 import { TitleComponent } from '../../components/title/title.component';
+// import { PieChartComponent } from 'src/app/components/pie-chart/pie-chart.component';
 
 @Component({
     selector: 'app-home',

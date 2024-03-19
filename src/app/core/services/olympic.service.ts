@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { OlympicType } from '../models/Olympic';
 
 @Injectable({
@@ -28,5 +28,16 @@ export class OlympicService {
 
   getOlympics() {
     return this.olympics$.asObservable();
+  }
+
+  getCountriesTotalMedal(): Observable<{ country: string, medalsTotal: number }[]> {
+    return this.http.get<any>(this.olympicUrl).pipe(
+      map(countries => {
+        return countries.map((country: any) => {
+          const totalMedals = country.participations.reduce((total: number, participation: any) => total + participation.medalsCount, 0);
+          return { country: country.country, medalsTotal: totalMedals };
+        });
+      })
+    );
   }
 }

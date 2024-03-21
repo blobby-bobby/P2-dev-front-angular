@@ -8,14 +8,14 @@ import { TitleComponent } from '../../components/title/title.component';
 import { PieChartComponent } from 'src/app/components/pie-chart/pie-chart.component';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
-    standalone: true,
-    imports: [TitleComponent, BadgeListComponent, PieChartComponent],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+  standalone: true,
+  imports: [TitleComponent, BadgeListComponent, PieChartComponent],
 })
 export class HomeComponent implements OnInit {
-  
+  // observable
   public olympics$: Observable<OlympicType[]> = of([]);
   olympicSubscription: Subscription | undefined;
 
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.olympicService.getOlympics().subscribe((olympics: OlympicType[]) => {
-      const uniqueParticipations: number[] = [];
+      let uniqueParticipations: number[] = [];
 
       // Iterate through the olympics array and extract unique JOs in the data
       olympics.forEach((country) => {
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    if(this.olympicSubscription) {
+    if (this.olympicSubscription) {
       this.olympicSubscription.unsubscribe();
     }
   }

@@ -1,10 +1,13 @@
 <div class="pie-chart">
-    <canvas baseChart
-        class="pie-chart__canvas" 
-        [datasets]="pieChartData" 
-        [options]="pieChartOptions" 
-        [type]="pieChartType" 
-        [labels]="pieChartLabels"
-        [legend]="pieChartLegend">
-    </canvas>
+  <canvas
+    baseChart
+    class="pie-chart__canvas"
+    [datasets]="pieChartData"
+    [options]="pieChartOptions"
+    [type]="pieChartType"
+    [labels]="pieChartLabels"
+    [legend]="pieChartLegend"
+    (click)="redirectToDetailPage($event)"
+  >
+  </canvas>
 </div>

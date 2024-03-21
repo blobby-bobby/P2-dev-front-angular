@@ -1,7 +1,13 @@
 import { ChartOptions } from 'chart.js';
 
+// medal
 const medal = new Image(20, 20);
-medal.src = 'assets/medal.png';
+medal.src = 'assets/medal.svg';
+
+/* chart config parameters from chart.js
+ * https://www.chartjs.org/docs/latest/configuration/tooltip.html
+ * config on : fonts, colors, tooltip
+ */
 export const chartOptionsConfig: ChartOptions = {
   responsive: true,
   plugins: {
@@ -34,3 +40,13 @@ export const chartOptionsConfig: ChartOptions = {
     },
   },
 };
+
+/* chart colors */
+export const chartColors: string[] = [
+  '#793D52',
+  '#89A1DB',
+  '#9780A1',
+  '#BFE0F1',
+  '#B8CBE7',
+  '#956065',
+];

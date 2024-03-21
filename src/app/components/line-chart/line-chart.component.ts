@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
+import { ChartDataset, ChartType } from 'chart.js';
 import {
   BaseChartDirective,
   provideCharts,
   withDefaultRegisterables,
 } from 'ng2-charts';
-import { chartOptionsConfig } from 'src/app/core/utils/chartOptionsConfig';
+import {
+  chartColors,
+  chartOptionsConfig,
+} from 'src/app/core/utils/chartOptionsConfig';
 
 @Component({
   selector: 'app-line-chart',
@@ -19,13 +22,12 @@ export class LineChartComponent {
   lineChartData: ChartDataset[] = [
     {
       data: [45, 37, 60, 55],
-      borderColor: '#793D52',
-      pointBackgroundColor: '#793D52',
+      borderColor: chartColors[0],
+      pointBackgroundColor: chartColors[0],
     },
   ];
   lineChartType: ChartType = 'line';
   lineChartLabels: string[] = ['2012', '2016', '2020', '2024'];
-  lineChartOptions: ChartOptions = chartOptionsConfig;
-
+  lineChartOptions = chartOptionsConfig;
   lineChartLegend = false;
 }

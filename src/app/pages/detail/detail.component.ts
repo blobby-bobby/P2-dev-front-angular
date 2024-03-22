@@ -19,6 +19,9 @@ export class DetailComponent implements OnInit {
   datas: BadgeType[] = [];
   pageTitle: string = '';
 
+  lineChartLabels: string[] = [];
+  numberOfMedalsByYear: number[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private olympicService: OlympicService
@@ -30,7 +33,7 @@ export class DetailComponent implements OnInit {
       this.olympicService
         .getCountryById(countryId)
         .subscribe((countryData: OlympicType | undefined) => {
-          // Update the datas array with the retrieved country data
+          // Update the datas badgesand page title with the retrieved country data
           this.pageTitle = countryData?.country || 'Country';
           this.datas = [
             {
@@ -54,6 +57,10 @@ export class DetailComponent implements OnInit {
               ),
             },
           ];
+
+          // Update the line chart data with the retrieved country data
+          this.lineChartLabels = ['2012', '2016', '2020', '2024'];
+          this.numberOfMedalsByYear = [5, 137, 260, 55];
         });
     }
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartDataset, ChartType } from 'chart.js';
 import {
   BaseChartDirective,
@@ -19,15 +19,22 @@ import {
   styleUrl: './line-chart.component.scss',
 })
 export class LineChartComponent {
-  lineChartData: ChartDataset[] = [
-    {
-      data: [45, 37, 60, 55],
-      borderColor: chartColors[0],
-      pointBackgroundColor: chartColors[0],
-    },
-  ];
+  @Input() lineChartLabels: string[] = [];
+  @Input() numberOfMedalsByYear: number[] = [];
+
+  lineChartData: ChartDataset[] = [];
   lineChartType: ChartType = 'line';
-  lineChartLabels: string[] = ['2012', '2016', '2020', '2024'];
   lineChartOptions = chartOptionsConfig;
   lineChartLegend = false;
+
+  ngOnInit(): void {
+    this.lineChartLabels = this.lineChartLabels;
+    this.lineChartData = [
+      {
+        data: this.numberOfMedalsByYear,
+        borderColor: chartColors[0],
+        pointBackgroundColor: chartColors[0],
+      },
+    ];
+  }
 }

@@ -26,9 +26,22 @@ export class OlympicService {
     );
   }
 
-  getOlympics() {
+  /**
+   * Retrieves the full list of olympics data.
+   *
+   * @return {Observable<OlympicType[]>} The observable for the olympics$.
+   */
+  getOlympics(): Observable<OlympicType[]> {
     return this.olympics$.asObservable();
   }
+
+  /**
+   * Retrieves a country by its ID.
+   *
+   * @param {number} id - The ID of the country.
+   * @return {Observable<OlympicType | undefined>} An observable that emits the country with the specified ID,
+   * used for the detail page.
+   */
 
   getCountryById(id: number): Observable<OlympicType | undefined> {
     return this.olympics$.pipe(

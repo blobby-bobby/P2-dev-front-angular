@@ -1,4 +1,4 @@
 export type BadgeType = {
-    datakey: string;
-    datavalue: number;
-}
+  datakey: string;
+  datavalue: number | undefined;
+};

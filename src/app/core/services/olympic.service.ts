@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { OlympicType } from '../models/Olympic';
 
 @Injectable({
@@ -13,10 +13,15 @@ export class OlympicService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Loads the initial data for the olympic games.
+   *
+   * @return {Observable<OlympicType[]>} An observable that emits an array of OlympicType objects.
+   */
   loadInitialData() {
-    return this.http.get<any>(this.olympicUrl).pipe(
-      tap((value: any) => this.olympics$.next(value)),
-      catchError((error: any, caught: Observable<void>) => {
+    return this.http.get<OlympicType[]>(this.olympicUrl).pipe(
+      tap((value: OlympicType[]) => this.olympics$.next(value)),
+      catchError((error: any, caught: Observable<OlympicType[]>) => {
         // TODO: improve error handling
         console.error(error);
         // can be useful to end loading state and let the user know something went wrong
@@ -26,7 +31,26 @@ export class OlympicService {
     );
   }
 
-  getOlympics() {
+  /**
+   * Retrieves the full list of olympics data.
+   *
+   * @return {Observable<OlympicType[]>} The observable for the olympics$.
+   */
+  getOlympics(): Observable<OlympicType[]> {
     return this.olympics$.asObservable();
+  }
+
+  /**
+   * Retrieves a country by its ID.
+   *
+   * @param {number} id - The ID of the country.
+   * @return {Observable<OlympicType | undefined>} An observable that emits the country with the specified ID,
+   * used for the detail page.
+   */
+
+  getCountryById(id: number): Observable<OlympicType | undefined> {
+    return this.olympics$.pipe(
+      map((countries) => countries.find((country) => country.id === id))
+    );
   }
 }

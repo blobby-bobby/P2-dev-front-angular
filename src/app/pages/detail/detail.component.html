@@ -1,4 +1,7 @@
-<app-title [pageTitle]="'Name of the country'"></app-title>
+<app-title [pageTitle]="pageTitle"></app-title>
 <app-badge-list [datas]="datas"></app-badge-list>
-<p>detail works!</p>
-<a routerLink="/">Back to home</a>
+<app-line-chart
+  [lineChartLabels]="lineChartLabels"
+  [numberOfMedalsByYear]="numberOfMedalsByYear"
+></app-line-chart>
+<a routerLink="/">← Back home</a>

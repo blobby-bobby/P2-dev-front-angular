@@ -1,6 +1,19 @@
-import { Component } from '@angular/core';
-import { BaseChartDirective } from 'ng2-charts';
-import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { Component, OnInit } from '@angular/core';
+import {
+  BaseChartDirective,
+  provideCharts,
+  withDefaultRegisterables,
+} from 'ng2-charts';
+import { ChartDataset, ChartType } from 'chart.js';
+import { OlympicService } from 'src/app/core/services/olympic.service';
+import { OlympicType } from 'src/app/core/models/Olympic';
+import { Observable, of } from 'rxjs';
+import {
+  chartColors,
+  chartOptionsConfig,
+} from 'src/app/core/utils/chartOptionsConfig';
+import { Router } from '@angular/router';
+import { ChartEvent } from 'chart.js/dist/core/core.plugins';
 
 @Component({
   selector: 'app-pie-chart',
@@ -8,14 +21,42 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
   imports: [BaseChartDirective],
   providers: [provideCharts(withDefaultRegisterables())],
   templateUrl: './pie-chart.component.html',
-  styleUrl: './pie-chart.component.scss'
+  styleUrl: './pie-chart.component.scss',
 })
-export class PieChartComponent {
-  pieChartData = [
-    { data: [30, 50, 20], label: 'Category 1' },
-    { data: [15, 40, 45], label: 'Category 2' },
-  ];
-  pieChartOptions = {
-    responsive: true,
-  }; // Replace with your desired options
+export class PieChartComponent implements OnInit {
+  // observable
+  public olympics$: Observable<OlympicType[]> = of([]);
+
+  // charts parameters
+  public pieChartData: ChartDataset[] = [];
+  public pieChartType: ChartType = 'pie';
+  public pieChartOptions = chartOptionsConfig;
+  public pieChartLabels: string[] = [];
+  public pieChartLegend = false;
+
+  // constructor
+  constructor(private olympicService: OlympicService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.olympicService.getOlympics().subscribe((data: OlympicType[]) => {
+      this.pieChartData = [
+        {
+          data: data.map((country) =>
+            country.participations.reduce(
+              (total, participation) => total + participation.medalsCount,
+              0
+            )
+          ),
+          backgroundColor: chartColors,
+        },
+      ];
+      this.pieChartLabels = data.map((country) => country.country);
+    });
+  }
+
+  // // redirect to detail page
+  chartClicked(e: any): void {
+    const id = e.active[0].index + 1;
+    this.router.navigate(['/detail', id]);
+  }
 }

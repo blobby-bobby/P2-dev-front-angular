@@ -1,6 +1,13 @@
 .badges {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .badges {
+    flex-wrap: wrap;
+  }
 }

@@ -13,6 +13,11 @@ export class OlympicService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Loads the initial data for the olympic games.
+   *
+   * @return {Observable<OlympicType[]>} An observable that emits an array of OlympicType objects.
+   */
   loadInitialData() {
     return this.http.get<OlympicType[]>(this.olympicUrl).pipe(
       tap((value: OlympicType[]) => this.olympics$.next(value)),

@@ -13,6 +13,8 @@ import {
   chartOptionsConfig,
 } from 'src/app/core/utils/chartOptionsConfig';
 import { Router } from '@angular/router';
+import { ChartEvent } from 'chart.js/dist/core/core.plugins';
+
 @Component({
   selector: 'app-pie-chart',
   standalone: true,
@@ -52,9 +54,9 @@ export class PieChartComponent implements OnInit {
     });
   }
 
-  // redirect to detail page
-  redirectToDetailPage(event: MouseEvent) {
-    console.log(event);
-    // this.router.navigate(['/detail', id]);
+  // // redirect to detail page
+  chartClicked(e: any): void {
+    const id = e.active[0].index + 1;
+    this.router.navigate(['/detail', id]);
   }
 }

@@ -14,9 +14,9 @@ export class OlympicService {
   constructor(private http: HttpClient) {}
 
   loadInitialData() {
-    return this.http.get<any>(this.olympicUrl).pipe(
-      tap((value: any) => this.olympics$.next(value)),
-      catchError((error: any, caught: Observable<void>) => {
+    return this.http.get<OlympicType[]>(this.olympicUrl).pipe(
+      tap((value: OlympicType[]) => this.olympics$.next(value)),
+      catchError((error: any, caught: Observable<OlympicType[]>) => {
         // TODO: improve error handling
         console.error(error);
         // can be useful to end loading state and let the user know something went wrong

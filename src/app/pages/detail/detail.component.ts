@@ -59,8 +59,14 @@ export class DetailComponent implements OnInit {
           ];
 
           // Update the line chart data with the retrieved country data
-          this.lineChartLabels = ['2012', '2016', '2020', '2024'];
-          this.numberOfMedalsByYear = [5, 137, 260, 55];
+          this.lineChartLabels =
+            countryData?.participations.map((participation: PartcipationType) =>
+              participation.year.toString()
+            ) || [];
+          this.numberOfMedalsByYear =
+            countryData?.participations.map(
+              (participation: PartcipationType) => participation.medalsCount
+            ) || [];
         });
     }
   }

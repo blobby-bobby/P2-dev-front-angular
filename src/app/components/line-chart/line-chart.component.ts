@@ -8,6 +8,7 @@ import {
 import {
   chartColors,
   chartOptionsConfig,
+  scalesConfig,
 } from 'src/app/core/utils/chartOptionsConfig';
 
 @Component({
@@ -24,7 +25,7 @@ export class LineChartComponent {
 
   lineChartData: ChartDataset[] = [];
   lineChartType: ChartType = 'line';
-  lineChartOptions = chartOptionsConfig;
+  lineChartOptions = { ...chartOptionsConfig, ...scalesConfig };
   lineChartLegend = false;
 
   ngOnInit(): void {

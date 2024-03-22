@@ -10,6 +10,7 @@ medal.src = 'assets/medal.svg';
  */
 export const chartOptionsConfig: ChartOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     tooltip: {
       backgroundColor: '#04838f',
@@ -50,3 +51,11 @@ export const chartColors: string[] = [
   '#B8CBE7',
   '#956065',
 ];
+
+export const scalesConfig: ChartOptions = {
+  scales: {
+    y: {
+      beginAtZero: true,
+    },
+  },
+};

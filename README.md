@@ -1,6 +1,6 @@
 # Télésport
 
-![Telesport](.src/assets/cover-page.jpg)
+![Telesport](/src/assets/cover-page.jpg)
 
 Télésport is a data visualization project focused on presenting Olympic Games data in an interactive and engaging way.
 The project features a home page with a pie chart showcasing medals per country, alongside general data on the Olympic Games.

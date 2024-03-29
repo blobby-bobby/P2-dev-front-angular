@@ -4,17 +4,12 @@ import { BadgeComponent } from '../badge/badge.component';
 import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-badge-list',
-    templateUrl: './badge-list.component.html',
-    styleUrls: ['./badge-list.component.scss'],
-    standalone: true,
-    imports: [NgFor, BadgeComponent],
+  selector: 'app-badge-list',
+  templateUrl: './badge-list.component.html',
+  styleUrls: ['./badge-list.component.scss'],
+  standalone: true,
+  imports: [NgFor, BadgeComponent],
 })
-export class BadgeListComponent implements OnInit {
+export class BadgeListComponent {
   @Input() datas: BadgeType[] = [];
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

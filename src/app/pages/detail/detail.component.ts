@@ -27,6 +27,11 @@ export class DetailComponent implements OnInit {
     private olympicService: OlympicService
   ) {}
 
+  /**
+   * Initialize the component and retrieve country data based on the route parameter.
+   *
+   * @return {void}
+   */
   ngOnInit(): void {
     const countryId = Number(this.route.snapshot.paramMap.get('id'));
     if (countryId) {
@@ -58,7 +63,9 @@ export class DetailComponent implements OnInit {
             },
           ];
 
-          // Update the line chart data with the retrieved country data
+          /**
+           * Update the line chart labels and data based on the retrieved country data
+           */
           this.lineChartLabels =
             countryData?.participations.map((participation: PartcipationType) =>
               participation.year.toString()

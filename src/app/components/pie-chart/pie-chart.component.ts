@@ -24,19 +24,19 @@ import { ChartEvent } from 'chart.js/dist/core/core.plugins';
   styleUrl: './pie-chart.component.scss',
 })
 export class PieChartComponent implements OnInit {
-  // observable
-  public olympics$: Observable<OlympicType[]> = of([]);
+  pieChartData: ChartDataset[] = [];
+  pieChartType: ChartType = 'pie';
+  pieChartOptions = chartOptionsConfig;
+  pieChartLabels: string[] = [];
+  pieChartLegend = false;
 
-  // charts parameters
-  public pieChartData: ChartDataset[] = [];
-  public pieChartType: ChartType = 'pie';
-  public pieChartOptions = chartOptionsConfig;
-  public pieChartLabels: string[] = [];
-  public pieChartLegend = false;
-
-  // constructor
   constructor(private olympicService: OlympicService, private router: Router) {}
 
+  /**
+   * Initialize component and retrieve Olympics data to populate pie chart.
+   *
+   * @return {void}
+   */
   ngOnInit(): void {
     this.olympicService.getOlympics().subscribe((data: OlympicType[]) => {
       this.pieChartData = [
@@ -54,7 +54,14 @@ export class PieChartComponent implements OnInit {
     });
   }
 
-  // // redirect to detail page
+  /**
+   * A function that handles the click event on the chart.
+   * Navigates to the detail page for the clicked country.
+   * based on ng2-charts library : https://krish512.github.io/ng4-charts/
+   *
+   * @param {any} e - the event object, type 'any' in the ng2-charts library
+   * @return {void}
+   */
   chartClicked(e: any): void {
     const id = e.active[0].index + 1;
     this.router.navigate(['/detail', id]);

@@ -9,8 +9,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TitleComponent implements OnInit {
   @Input() pageTitle!: string;
 
-  constructor() {}
-
+  /**
+   * Initializes the component after Angular has initialized and sets the page title if available.
+   */
   ngOnInit(): void {
     if (this.pageTitle) {
       this.pageTitle = this.pageTitle;

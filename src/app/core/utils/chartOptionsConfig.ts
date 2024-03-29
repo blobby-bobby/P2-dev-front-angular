@@ -1,6 +1,8 @@
 import { ChartOptions } from 'chart.js';
 
-// medal
+/**
+ * medal image to be used in the tooltip
+ */
 const medal = new Image(20, 20);
 medal.src = 'assets/medal.svg';
 
@@ -42,7 +44,7 @@ export const chartOptionsConfig: ChartOptions = {
   },
 };
 
-/* chart colors */
+/* chart colors to custom the charts */
 export const chartColors: string[] = [
   '#793D52',
   '#89A1DB',
@@ -52,6 +54,10 @@ export const chartColors: string[] = [
   '#956065',
 ];
 
+/* chart config parameters from chart.js
+ * https://www.chartjs.org/docs/latest/axes/cartesian/linear.html
+ * config on : scales for the line chart
+ */
 export const scalesConfig: ChartOptions = {
   scales: {
     y: {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   BaseChartDirective,
   provideCharts,
@@ -13,6 +13,7 @@ import {
   chartOptionsConfig,
 } from 'src/app/core/utils/chartOptionsConfig';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pie-chart',
@@ -22,7 +23,9 @@ import { Router } from '@angular/router';
   templateUrl: './pie-chart.component.html',
   styleUrl: './pie-chart.component.scss',
 })
-export class PieChartComponent implements OnInit {
+export class PieChartComponent implements OnInit, OnDestroy {
+  private olympicsSubscription: Subscription | undefined;
+
   pieChartData: ChartData<'pie', number[], string> = {
     labels: [],
     datasets: [
@@ -45,32 +48,36 @@ export class PieChartComponent implements OnInit {
    * @return {void}
    */
   ngOnInit(): void {
-    this.olympicService.getOlympics().subscribe((data: OlympicType[]) => {
-      this.pieChartData = {
-        labels: data.map((country) => country.country),
-        datasets: [
-          {
-            data: data.map((country) =>
-              country.participations.reduce(
-                (total, participation) => total + participation.medalsCount,
-                0
-              )
-            ),
-            backgroundColor: chartColors,
-          },
-        ],
-      };
-      this.pieChartLabels = this.pieChartData?.labels ?? [];
-    });
+    this.olympicsSubscription = this.olympicService
+      .getOlympics()
+      .subscribe((data: OlympicType[]) => {
+        this.pieChartData = {
+          labels: data.map((country) => country.country),
+          datasets: [
+            {
+              data: data.map((country) =>
+                country.participations.reduce(
+                  (total, participation) => total + participation.medalsCount,
+                  0
+                )
+              ),
+              backgroundColor: chartColors,
+            },
+          ],
+        };
+        this.pieChartLabels = this.pieChartData?.labels ?? [];
+      });
 
     Chart.defaults.font.family = 'Montserrat';
-    Chart.defaults.color = 'white';
-    Chart.defaults.font.weight = 'bold';
     Chart.defaults.plugins.datalabels = {
       color: 'white',
       anchor: 'end',
       align: 'start',
-      offset: 20,
+      offset: 30,
+      font: {
+        size: 16,
+        weight: 'bold',
+      },
       formatter: (value, ctx) => {
         value = this.pieChartLabels[ctx.dataIndex];
         console.log(ctx);
@@ -90,5 +97,11 @@ export class PieChartComponent implements OnInit {
   chartClicked(e: any): void {
     const id = e.active[0].index + 1;
     this.router.navigate(['/detail', id]);
+  }
+
+  ngOnDestroy(): void {
+    if (this.olympicsSubscription) {
+      this.olympicsSubscription.unsubscribe();
+    }
   }
 }

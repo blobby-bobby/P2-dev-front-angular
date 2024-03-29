@@ -2,11 +2,11 @@
   <canvas
     baseChart
     class="pie-chart__canvas"
-    [datasets]="pieChartData"
+    [data]="pieChartData"
     [options]="pieChartOptions"
     [type]="pieChartType"
     [labels]="pieChartLabels"
-    [legend]="pieChartLegend"
+    [plugins]="plugins"
     (chartClick)="chartClicked($event)"
   >
   </canvas>

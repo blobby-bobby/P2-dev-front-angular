@@ -4,16 +4,15 @@ import {
   provideCharts,
   withDefaultRegisterables,
 } from 'ng2-charts';
-import { ChartDataset, ChartType } from 'chart.js';
+import { ChartData, ChartType, Chart } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { OlympicType } from 'src/app/core/models/Olympic';
-import { Observable, of } from 'rxjs';
 import {
   chartColors,
   chartOptionsConfig,
 } from 'src/app/core/utils/chartOptionsConfig';
 import { Router } from '@angular/router';
-import { ChartEvent } from 'chart.js/dist/core/core.plugins';
 
 @Component({
   selector: 'app-pie-chart',
@@ -24,11 +23,19 @@ import { ChartEvent } from 'chart.js/dist/core/core.plugins';
   styleUrl: './pie-chart.component.scss',
 })
 export class PieChartComponent implements OnInit {
-  pieChartData: ChartDataset[] = [];
+  pieChartData: ChartData<'pie', number[], string> = {
+    labels: [],
+    datasets: [
+      {
+        data: [],
+        backgroundColor: [],
+      },
+    ],
+  };
   pieChartType: ChartType = 'pie';
   pieChartOptions = chartOptionsConfig;
   pieChartLabels: string[] = [];
-  pieChartLegend = false;
+  plugins = [ChartDataLabels];
 
   constructor(private olympicService: OlympicService, private router: Router) {}
 
@@ -39,19 +46,37 @@ export class PieChartComponent implements OnInit {
    */
   ngOnInit(): void {
     this.olympicService.getOlympics().subscribe((data: OlympicType[]) => {
-      this.pieChartData = [
-        {
-          data: data.map((country) =>
-            country.participations.reduce(
-              (total, participation) => total + participation.medalsCount,
-              0
-            )
-          ),
-          backgroundColor: chartColors,
-        },
-      ];
-      this.pieChartLabels = data.map((country) => country.country);
+      this.pieChartData = {
+        labels: data.map((country) => country.country),
+        datasets: [
+          {
+            data: data.map((country) =>
+              country.participations.reduce(
+                (total, participation) => total + participation.medalsCount,
+                0
+              )
+            ),
+            backgroundColor: chartColors,
+          },
+        ],
+      };
+      this.pieChartLabels = this.pieChartData?.labels ?? [];
     });
+
+    Chart.defaults.font.family = 'Montserrat';
+    Chart.defaults.color = 'white';
+    Chart.defaults.font.weight = 'bold';
+    Chart.defaults.plugins.datalabels = {
+      color: 'white',
+      anchor: 'end',
+      align: 'start',
+      offset: 20,
+      formatter: (value, ctx) => {
+        value = this.pieChartLabels[ctx.dataIndex];
+        console.log(ctx);
+        return value;
+      },
+    };
   }
 
   /**

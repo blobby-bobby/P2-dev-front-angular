@@ -1,10 +1,29 @@
-# OlympicGamesStarter
+# Télésport
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+![Telesport](.src/assets/cover-page.jpg)
 
-Don't forget to install your node_modules before starting (`npm install`).
+Télésport is a data visualization project focused on presenting Olympic Games data in an interactive and engaging way.
+The project features a home page with a pie chart showcasing medals per country, alongside general data on the Olympic Games.
+Users can click on a portion of the pie chart to access detailed country-specific data, presented in a dynamic line chart format.
+
+---
+
+## Stack
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3,
+
+> Update: the project has been migrated to **Angular version 17.2.4**.
+
+The following stack has been used to complete the project
+
+- `RxJS` for the Observables
+- `Charts.js` and `ng2-charts` to render the charts
+
+---
 
 ## Development server
+
+> Don't forget to install your node_modules before starting (`npm install`).
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
@@ -12,18 +31,19 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Where to start
+---
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+## Architecture
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+The project has the following structure:
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+`components` folder: contains every reusable components
+`pages` folder: contains components used for routing
+`core` folder: contains the business logic (`services`, `models` folders for the Types, `utils` for the config of features)
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+---
 
-You're now ready to implement the requested features.
+## Angular 17 updates on the codebase
 
-Good luck!
+- All the components has been set to standalone, with the command `ng generate @angular/core:standalone`
+- `app-routing.module.ts` has been replaced with `app-routes.ts` to fit Angular 17 starter projects standards, and routing has been simplified

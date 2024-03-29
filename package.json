@@ -20,6 +20,7 @@
     "@angular/router": "^17.2.4",
     "@reactivex/rxjs": "^6.6.7",
     "chart.js": "^4.4.2",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "ng2-charts": "^6.0.0",
     "rxjs": "^7.8.1",
     "tslib": "^2.6.2",

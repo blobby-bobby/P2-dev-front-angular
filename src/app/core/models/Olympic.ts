@@ -1,7 +1,7 @@
-import { PartcipationType } from "./Participation"
+import { ParticipationType } from './Participation';
 
 export type OlympicType = {
-    id: number,
-    country: string,
-    participations: PartcipationType[]
-}
+  id: number;
+  country: string;
+  participations: ParticipationType[];
+};

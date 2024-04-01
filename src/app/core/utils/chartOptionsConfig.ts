@@ -1,4 +1,4 @@
-import { ChartOptions } from 'chart.js';
+import { ChartConfiguration, ChartOptions } from 'chart.js';
 
 /**
  * medal image to be used in the tooltip
@@ -10,10 +10,13 @@ medal.src = 'assets/medal.svg';
  * https://www.chartjs.org/docs/latest/configuration/tooltip.html
  * config on : fonts, colors, tooltip
  */
-export const chartOptionsConfig: ChartOptions = {
+export const chartOptionsConfig: ChartConfiguration['options'] = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
+    legend: {
+      display: false,
+    },
     tooltip: {
       backgroundColor: '#04838f',
       titleFont: {

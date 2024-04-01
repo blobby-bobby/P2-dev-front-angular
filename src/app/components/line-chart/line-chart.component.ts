@@ -1,41 +1,48 @@
-import { Component, Input } from '@angular/core';
-import { ChartDataset, ChartType } from 'chart.js';
-import {
-  BaseChartDirective,
-  provideCharts,
-  withDefaultRegisterables,
-} from 'ng2-charts';
-import {
-  chartColors,
-  chartOptionsConfig,
-  scalesConfig,
-} from 'src/app/core/utils/chartOptionsConfig';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { LineGraphData } from 'src/app/core/models/LineGraphData';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { OlympicService } from 'src/app/core/services/olympic.service';
 
 @Component({
   selector: 'app-line-chart',
   standalone: true,
-  imports: [BaseChartDirective],
-  providers: [provideCharts(withDefaultRegisterables())],
+  imports: [NgxChartsModule],
+  providers: [],
   templateUrl: './line-chart.component.html',
   styleUrl: './line-chart.component.scss',
 })
-export class LineChartComponent {
-  @Input() lineChartLabels: string[] = [];
-  @Input() numberOfMedalsByYear: number[] = [];
+export class LineChartComponent implements OnInit {
+  constructor(private olympicService: OlympicService) {}
 
-  lineChartData: ChartDataset[] = [];
-  lineChartType: ChartType = 'line';
-  lineChartOptions = { ...chartOptionsConfig, ...scalesConfig };
-  lineChartLegend = false;
+  @Input() selectedCountryId!: number;
+
+  public xAxis: boolean = true;
+  public showXAxisLabel: boolean = true;
+  public yAxis: boolean = true;
+  public autoScale: boolean = true;
+
+  public graphData$!: Observable<LineGraphData[]>;
 
   ngOnInit(): void {
-    this.lineChartLabels = this.lineChartLabels;
-    this.lineChartData = [
-      {
-        data: this.numberOfMedalsByYear,
-        borderColor: chartColors[0],
-        pointBackgroundColor: chartColors[0],
-      },
-    ];
+    this.graphData$ = this.olympicService
+      .getCountryById(this.selectedCountryId)
+      .pipe(
+        map((data) => {
+          let series = [...data.participations].map((value) => {
+            return {
+              name: value.year.toString(),
+              value: value.medalsCount,
+            };
+          });
+          return [
+            {
+              name: data.country,
+              series,
+            },
+          ];
+        })
+      );
   }
 }

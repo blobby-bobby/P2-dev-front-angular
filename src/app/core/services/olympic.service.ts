@@ -48,9 +48,14 @@ export class OlympicService {
    * used for the detail page.
    */
 
-  getCountryById(id: number): Observable<OlympicType | undefined> {
-    return this.olympics$.pipe(
-      map((countries) => countries.find((country) => country.id === id))
-    );
+  getCountryById(id: number): Observable<OlympicType> {
+    return this.http
+      .get<OlympicType[]>(this.olympicUrl)
+      .pipe(
+        map(
+          (olympics: OlympicType[]) =>
+            [...olympics].filter((olympic) => olympic.id === id)[0]
+        )
+      );
   }
 }

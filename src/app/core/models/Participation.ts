@@ -1,4 +1,4 @@
-export type PartcipationType = {
+export type ParticipationType = {
   id: number;
   year: number;
   city: string;

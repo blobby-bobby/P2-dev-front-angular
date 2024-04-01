@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { BadgeType } from 'src/app/core/models/Badge';
 import { OlympicType } from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -15,7 +15,7 @@ import { PieChartComponent } from 'src/app/components/pie-chart/pie-chart.compon
   imports: [TitleComponent, BadgeListComponent, PieChartComponent],
 })
 export class HomeComponent implements OnInit {
-  olympicSubscription: Subscription | undefined;
+  olympicSubscription!: Subscription;
   datas: BadgeType[] = [];
 
   constructor(private olympicService: OlympicService) {}

@@ -9,7 +9,16 @@
     <ng-template #tooltipTemplate let-model="model">
       <div class="pie-chart__tooltip">
         <p>{{ model.name }}</p>
-        <p>🏅 {{ model.value }}</p>
+        <div class="pie-chart__tooltip--count">
+          <img
+            src="../../../assets/medal.svg"
+            alt="Number of medals"
+            srcset=""
+          />
+          <p>
+            {{ model.value }}
+          </p>
+        </div>
       </div>
     </ng-template>
   </ngx-charts-pie-chart>

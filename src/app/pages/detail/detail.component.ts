@@ -5,7 +5,7 @@ import { BadgeListComponent } from '../../components/badge-list/badge-list.compo
 import { TitleComponent } from '../../components/title/title.component';
 import { LineChartComponent } from '../../components/line-chart/line-chart.component';
 import { OlympicService } from 'src/app/core/services/olympic.service';
-import { PartcipationType } from 'src/app/core/models/Participation';
+import { ParticipationType } from 'src/app/core/models/Participation';
 import { OlympicType } from 'src/app/core/models/Olympic';
 
 @Component({
@@ -48,7 +48,7 @@ export class DetailComponent implements OnInit {
             {
               datakey: 'Total number medals',
               datavalue: countryData?.participations.reduce(
-                (total: number, participation: PartcipationType) =>
+                (total: number, participation: ParticipationType) =>
                   total + participation.medalsCount,
                 0
               ),
@@ -56,7 +56,7 @@ export class DetailComponent implements OnInit {
             {
               datakey: 'Total number of athletes',
               datavalue: countryData?.participations.reduce(
-                (total: number, participation: PartcipationType) =>
+                (total: number, participation: ParticipationType) =>
                   total + participation.athleteCount,
                 0
               ),
@@ -67,12 +67,13 @@ export class DetailComponent implements OnInit {
            * Update the line chart labels and data based on the retrieved country data
            */
           this.lineChartLabels =
-            countryData?.participations.map((participation: PartcipationType) =>
-              participation.year.toString()
+            countryData?.participations.map(
+              (participation: ParticipationType) =>
+                participation.year.toString()
             ) || [];
           this.numberOfMedalsByYear =
             countryData?.participations.map(
-              (participation: PartcipationType) => participation.medalsCount
+              (participation: ParticipationType) => participation.medalsCount
             ) || [];
         });
     }

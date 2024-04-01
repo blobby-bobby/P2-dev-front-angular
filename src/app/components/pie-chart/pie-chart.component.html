@@ -1,13 +1,16 @@
 <div class="pie-chart">
-  <canvas
-    baseChart
-    class="pie-chart__canvas"
-    [data]="pieChartData"
-    [options]="pieChartOptions"
-    [type]="pieChartType"
-    [labels]="pieChartLabels"
-    [plugins]="plugins"
-    (chartClick)="chartClicked($event)"
+  <ngx-charts-pie-chart
+    *ngIf="graphData$ | async as graphData"
+    [results]="graphData"
+    [labels]="true"
+    [trimLabels]="false"
+    (select)="onSelect($event)"
   >
-  </canvas>
+    <ng-template #tooltipTemplate let-model="model">
+      <div class="pie-chart__tooltip">
+        <p>{{ model.name }}</p>
+        <p>🏅 {{ model.value }}</p>
+      </div>
+    </ng-template>
+  </ngx-charts-pie-chart>
 </div>

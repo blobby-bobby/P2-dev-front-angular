@@ -36,3 +36,37 @@ a {
     opacity: 0.6;
   }
 }
+
+/**
+ * ngx-charts tooltip & font size settings overrides
+ */
+
+.ngx-charts-tooltip-content.type-tooltip {
+  .tooltip-caret.position-top {
+    border-top-color: var(--main-accent-color) !important;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .tooltip-caret.position-left {
+    border-left-color: var(--main-accent-color) !important;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .tooltip-caret.position-right {
+    border-right-color: var(--main-accent-color) !important;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .tooltip-caret.position-bottom {
+    border-bottom-color: var(--main-accent-color) !important;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  background-color: var(--main-accent-color) !important;
+  color: "white" !important;
+}
+
+.pie-label {
+  font-size: 1.25rem !important;
+  padding: 0.25rem !important;
+}

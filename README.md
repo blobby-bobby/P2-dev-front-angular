@@ -18,9 +18,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 The following stack has been used to complete the project
 
 - `RxJS` for the Observables
-- `Charts.js` and `ng2-charts` to render the charts
-
----
+- `ngx-charts` to render the charts
 
 ## Development server
 
@@ -32,17 +30,13 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
----
-
 ## Architecture
 
 The project has the following structure:
 
 `components` folder: contains every reusable components
 `pages` folder: contains components used for routing
-`core` folder: contains the business logic (`services`, `models` folders for the Types, `utils` for the config of features)
-
----
+`core` folder: contains the business logic (`services`, `models` folders for the Types)
 
 ## Angular 17 updates on the codebase
 

@@ -25,6 +25,11 @@ export class LineChartComponent implements OnInit {
 
   public graphData$!: Observable<LineGraphData[]>;
 
+  /**
+   * Initialize component with graph data based on selected country ID.
+   *
+   * @return {void}
+   */
   ngOnInit(): void {
     this.graphData$ = this.olympicService
       .getCountryById(this.selectedCountryId)

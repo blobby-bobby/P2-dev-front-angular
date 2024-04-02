@@ -37,6 +37,11 @@ export class DetailComponent implements OnInit, OnDestroy {
     this.selectedCountryId = 0;
   }
 
+  /**
+   * Generate components with selected country data id's.
+   * Generates the datas badges & the line chart with the retrieved data.
+   *
+   */
   ngOnInit(): void {
     this.selectedCountryId = Number(this.route.snapshot.params['id']);
     this.subscription = this.olympicService
@@ -74,6 +79,12 @@ export class DetailComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  /**
+   * Called when the component is destroyed.
+   * Unsubscribes from the subscription to avoid memory leaks.
+   *
+   * @return {void} Nothing is returned.
+   */
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

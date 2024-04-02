@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BadgeType } from 'src/app/core/models/Badge';
 import { OlympicType } from 'src/app/core/models/Olympic';
@@ -14,8 +14,8 @@ import { PieChartComponent } from 'src/app/components/pie-chart/pie-chart.compon
   standalone: true,
   imports: [TitleComponent, BadgeListComponent, PieChartComponent],
 })
-export class HomeComponent implements OnInit {
-  olympicSubscription!: Subscription;
+export class HomeComponent implements OnInit, OnDestroy {
+  subscription!: Subscription;
   datas: BadgeType[] = [];
 
   constructor(private olympicService: OlympicService) {}
@@ -27,27 +27,33 @@ export class HomeComponent implements OnInit {
    * @return {void} This function does not return a value.
    */
   ngOnInit(): void {
-    this.olympicService.getOlympics().subscribe((olympics: OlympicType[]) => {
-      let uniqueParticipations: number[] = [];
+    this.subscription = this.olympicService
+      .getOlympics()
+      .subscribe((olympics: OlympicType[]) => {
+        let uniqueParticipations: number[] = [];
 
-      /**
-       * Iterate through the olympics array and extract unique JOs in the database.
-       */
-      olympics.forEach((country) => {
-        country.participations.forEach((participation) => {
-          if (!uniqueParticipations.includes(participation.year)) {
-            uniqueParticipations.push(participation.year);
-          }
+        /**
+         * Iterate through the olympics array and extract unique JOs in the database.
+         */
+        olympics.forEach((country) => {
+          country.participations.forEach((participation) => {
+            if (!uniqueParticipations.includes(participation.year)) {
+              uniqueParticipations.push(participation.year);
+            }
+          });
         });
-      });
 
-      /**
-       * Update the datas badges with the retrieved data.
-       */
-      this.datas = [
-        { datakey: 'Number of JOs', datavalue: uniqueParticipations.length },
-        { datakey: 'Number of countries', datavalue: olympics.length },
-      ];
-    });
+        /**
+         * Update the datas badges with the retrieved data.
+         */
+        this.datas = [
+          { datakey: 'Number of JOs', datavalue: uniqueParticipations.length },
+          { datakey: 'Number of countries', datavalue: olympics.length },
+        ];
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

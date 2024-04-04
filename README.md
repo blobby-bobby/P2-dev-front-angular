@@ -34,9 +34,9 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 The project has the following structure:
 
-`components` folder: contains every reusable components
-`pages` folder: contains components used for routing
-`core` folder: contains the business logic (`services`, `models` folders for the Types)
+- `components` folder: contains every reusable components
+- `pages` folder: contains components used for routing
+- `core` folder: contains the business logic (`services`, `models` folders for the Types)
 
 ## Angular 17 updates on the codebase
 

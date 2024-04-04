@@ -5,8 +5,7 @@ import { BadgeListComponent } from '../../components/badge-list/badge-list.compo
 import { TitleComponent } from '../../components/title/title.component';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { OlympicType } from 'src/app/core/models/Olympic';
-import { tap, Subscription, Observable, map } from 'rxjs';
-import { LineGraphData } from 'src/app/core/models/LineGraphData';
+import { tap, Subscription } from 'rxjs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LineChartComponent } from 'src/app/components/line-chart/line-chart.component';
 

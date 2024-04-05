@@ -21,6 +21,7 @@ export class LineChartComponent implements OnInit {
   public xAxis: boolean = true;
   public showXAxisLabel: boolean = true;
   public yAxis: boolean = true;
+  public xAxisLabel: string = 'Dates';
   public autoScale: boolean = true;
 
   public graphData$!: Observable<LineGraphData[]>;
